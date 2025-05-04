@@ -6,13 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(to right, #ffccd5, #ffe6e9);
-      font-family: 'Segoe UI', sans-serif;
-      overflow: hidden;
-      text-align: center;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to top right, #ffe0e6, #ffd1dc);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh; /* ✅ permite crecer y scroll */
     }
+
+
 
     h1 {
       margin-top: 80px;
@@ -58,6 +63,66 @@
       opacity: 0.8;
     }
 
+    .galeria-wrapper {
+  position: relative;
+  max-width: 90%;
+  margin: 40px auto;
+  overflow: hidden;
+}
+
+.galeria {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  gap: 20px;
+  padding: 20px;
+}
+
+.carrusel-item {
+  flex: 0 0 auto;
+  width: 300px;
+  scroll-snap-align: start;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  padding: 15px;
+  text-align: center;
+}
+
+.carrusel-item img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.descripcion {
+  margin-top: 10px;
+  font-size: 1em;
+  color: #880e4f;
+}
+
+.scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #f06292;
+  color: white;
+  border: none;
+  font-size: 1.5em;
+  padding: 10px 15px;
+  cursor: pointer;
+  z-index: 1;
+  border-radius: 50%;
+  opacity: 0.8;
+}
+
+.scroll-btn.left {
+  left: -20px;
+}
+
+.scroll-btn.right {
+  right: -20px;
+}
     @keyframes flotar {
       0% {
         transform: translateY(100vh) scale(1);
@@ -70,14 +135,27 @@
     }
   </style>
 </head>
+
+
+  
 <body>
-  <h1>💖 Feliz primer mes, Sandy 💖</h1>
-  <button onclick="mostrarDedicatoria()">Ver mi dedicatoria</button>
+  <h1>💖 Feliz primer mes, mi Sandy 💖</h1>
+  <button onclick="mostrarDedicatoria()">Haz click jasja</button>
   <div id="mensaje"></div>
+
+  <div class="galeria-wrapper">
+    <button class="scroll-btn left" onclick="scrollGaleria(-1)">⬅</button>
+    <div class="galeria" id="galeria">
+    </div>
+    <button class="scroll-btn right" onclick="scrollGaleria(1)">➡</button>
+  </div>
+  
+  
+  
 
   <script>
     const mensaje = [
-      "Hola mi amor Sandy 💕",
+      "Mi Sandy 💕",
       "",
       "Hoy cumplimos un mes juntos,",
       "y quiero que sepas que cada día contigo ha sido mágico ✨.",
@@ -86,28 +164,38 @@
       "Contigo todo es mejor. Tú haces que cada momento valga la pena.",
       "",
       "Este solo es el comienzo de muchos meses hermosos.",
-      "Te amo con todo mi corazón 💗",
+      "Te quiero con todo mi corazón 💗",
       "",
       "Con amor infinito,",
       "Kevin 💌"
     ];
 
     function mostrarDedicatoria() {
-      const div = document.getElementById("mensaje");
-      div.innerHTML = "";
-      div.style.display = "block";
-      let i = 0;
-      const intervalo = setInterval(() => {
-        if (i < mensaje.length) {
-          div.innerHTML += mensaje[i] + "\n";
-          i++;
-        } else {
-          clearInterval(intervalo);
-        }
-      }, 800);
-    }
+        const div = document.getElementById("mensaje");
+        div.innerHTML = "";
+        div.style.display = "block";
+        let i = 0, j = 0;
 
-    // Generador de corazones flotando
+        function escribirLinea() {
+            if (i >= mensaje.length) return;
+
+            const linea = mensaje[i];
+            if (j < linea.length) {
+            div.innerHTML += linea.charAt(j);
+            j++;
+            setTimeout(escribirLinea, 40); 
+            } else {
+            div.innerHTML += "<br>";
+            i++;
+            j = 0;
+            setTimeout(escribirLinea, 500); 
+            }
+        }
+
+        escribirLinea();
+        }
+
+
     setInterval(() => {
       const corazon = document.createElement("div");
       corazon.classList.add("corazon");
@@ -118,5 +206,61 @@
       setTimeout(() => corazon.remove(), 5000);
     }, 300);
   </script>
+
+<script>
+    const galeria = document.getElementById('galeria');
+    const descripciones = [
+  "🎬 Nuestra primera salida al cine donde no comimos nada de cancha jajs 💕 – 12 de marzo de 2025",
+  "🌳 Nuestra segunda salida, cuando fuimos al parque del bosque, luego comimos alitas. Creo que estaba más nervioso que en la primera salida jasjjas, todavía queda pendiente que vayamos a que manejes los carros del parque amor ajsjas, que por cierto, a cada rato pasaba uno queriendonos atropellar jasj– 18 de marzo de 2025",
+  "💛 El día que te di las flores amarillas amor – 21 de marzo de 2025",
+  "🌸 En el mall con tus flores mi Sandy jasj – 21 de marzo de 2025",
+
+  "🍗 Cuando fuimos a comer alitas por la UNT – 2 de abril de 2025",
+  "📸 Otra foto de ese día jasj que bonita eres – 1 de marzo de 2025",
+  "💌 La nota que me diste mi amor – 4 de abril de 2025",
+  "🌼 En el parque del golf – 4 de abril de 2025",
+
+  "😍 Qué bonita sales, como siempre – 4 de abril de 2025",
+  "🎨 Los cuadros que pintamos colocando nuestra fecha – 4 de abril de 2025",
+  "🚗 Cuando te fui a recoger por primera vez en el carro – 9 de abril de 2025",
+  "🕺 El día que me enseñaste a bailar en el parque jasja – 11 de abril de 2025",
+
+  "🎠 En el columpio jajsj luego de estar grabando tik toks jasj, si nos quedabamos un poco más nos encerraban en el parque jasjaj  – 11 de abril de 2025",
+  "💋 jasjsa ahora te tocó darme un beso a mí – 11 de abril de 2025",
+  "🍦 Luego a comer helado, donde te gané en el jenga por cierto amor jasj – 11 de abril de 2025",
+
+  "🌊 Cuando fuimos a Huanchaco – 15 de abril de 2025",
+  "📷 algunas fotos de temprano de ese día y sacaste bastantes stickers jasjaj– 15 de abril de 2025",
+  "😂 Me faltaron subir tus caneadas amor ajjs, lamentablemente me olvidé de canearte cuando te dormiste en el micro jasjasja – 15 de mayo de 2025",
+  "🛍️ Cuando fuimos ese domingo al mall – 20 de abril de 2025",
+
+  "📖 Con el libro amor en el parque – 25 de abril de 2025",
+  "🌷 Con las flores, que me pasaste después de días la foto ajjas – 23 de abril de 2025",
+  "🥩 Comiendo parrilla y alitas – 29 de abril de 2025",
+  "🏠 En nuestro mini depa (alquilado) jasjas – 1 de mayo de 2025",
+  "🥩 Con la mejor chef del mundo – 1 de mayo de 2025"
+
+];
+
+  
+    for (let i = 1; i <= 24; i++) {
+      const item = document.createElement('div');
+      item.className = 'carrusel-item';
+      item.innerHTML = `
+        <img src="img/${i}.jpeg" alt="Imagen ${i}">
+        <div class="descripcion">${descripciones[i - 1]}</div>
+      `;
+      galeria.appendChild(item);
+    }
+  
+    function scrollGaleria(direction) {
+      const scrollAmount = 320; 
+      galeria.scrollBy({
+        left: scrollAmount * direction,
+        behavior: 'smooth'
+      });
+    }
+  </script>
+  
 </body>
 </html>
