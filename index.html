@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feliz primer mes, mi amor</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to top right, #ffe0e6, #ffd1dc);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #c2185b;
+      animation: heartbeat 2s infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 15px 25px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 10px;
+      background-color: #f06292;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #ec407a;
+    }
+
+    #mensaje {
+      display: none;
+      margin-top: 40px;
+      font-size: 1.5em;
+      color: #880e4f;
+      max-width: 600px;
+    }
+  </style>
+</head>
+<body>
+  <h1>💖 Feliz primer mes, mi Sandy 💖</h1>
+
+  <button onclick="mostrarMensaje()">Haz clic para ver mi mensaje</button>
+
+  <div id="mensaje">
+    Gracias por este hermoso mes lleno de risas, cariño y momentos inolvidables.  
+    Eres la mejor parte de mis días.  
+    ¡Te quiero para toda mi vida! 💑✨
+  </div>
+
+  <script>
+    function mostrarMensaje() {
+      document.getElementById("mensaje").style.display = "block";
+    }
+  </script>
+</body>
+</html>
