@@ -139,6 +139,12 @@
 
   
 <body>
+  <audio id="musicaFondo" loop>
+    <source src="audio.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio.
+  </audio>
+  
+
   <h1>💖 Feliz primer mes, mi Sandy 💖</h1>
   <button onclick="mostrarDedicatoria()">Haz click jasja</button>
   <div id="mensaje"></div>
@@ -163,14 +169,27 @@
       "Gracias por tu sonrisa, tu cariño, y por estar a mi lado.",
       "Contigo todo es mejor. Tú haces que cada momento valga la pena.",
       "",
-      "Este solo es el comienzo de muchos meses hermosos.",
-      "Te quiero con todo mi corazón 💗",
+      "Este solo es el comienzo de muchísimos meses más.",
+      "Quiero estar contigo para siempre",
+      "Te quiero con todo mi corazón y mi alma 💗",
       "",
       "Con amor infinito,",
-      "Kevin 💌"
+      "Kevin"
     ];
 
     function mostrarDedicatoria() {
+      const audio = document.getElementById("musicaFondo");
+      audio.volume = 0.6;
+
+        audio.play()
+          .then(() => {
+            console.log("Música reproducida");
+          })
+          .catch((error) => {
+            console.log("Error al reproducir la música:", error);
+          });
+
+
         const div = document.getElementById("mensaje");
         div.innerHTML = "";
         div.style.display = "block";
